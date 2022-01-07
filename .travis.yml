@@ -4,21 +4,24 @@ language: java
 services:
 - postgresql
 - docker
-
 script:
-  - ./mvnw clean install -B
-
+- "./mvnw clean install -B"
 after_success:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
-  - export IMAGE_NAME=iteration2020/mtuci-policy-app
-  - docker build -t $IMAGE_NAME:latest .
-  - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
-  - docker push $IMAGE_NAME:$TAG
-
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH";
+  fi`
+- export IMAGE_NAME=iteration2020/mtuci-policy-app
+- docker build -t $IMAGE_NAME:latest .
+- docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+- docker push $IMAGE_NAME:$TAG
 deploy:
   provider: heroku
-  api_key: $HEROKU_API_KEY
+  api_key: "$HEROKU_API_KEY"
   app: mtuci-policy-app
   on:
     all_branches: true
+env:
+  global:
+  - secure: KWXmCLbhpzrD5Zx6d45pxK7PPfKIGnuJU1SlW1b8NWosneigwHVlCMBEu/Q+PXNjsAEbcM6LXY6rQ8/b95MCT5qLi3v22qPfVx8lGUrenOm3fXP5Fn+uzUNXZMgUZQ/km4rw0cUXPZsVE7sdKK2O+Dpa8Q2JIdttUrU2gSkzkS9a70flY+2di8mtqoCHflpQgj8EiMZUig2fSBiwdvRo082I2y5PJgZdXeSAy0Jt17EVB9Ljeg5OPSEBI72WbbLad9qTjtMnPvirErH+cKNQzxvpXrbPXpG/Nco/GUxgQyuKQvqFRMPp/eMQhwM3Er0V9dDqMKPNe/ejWS6/3WdGtKEBKi3a3sGDIUlLvEMIgU4mzczej+MuKDm16h9nEqrgAxcJII24pBRbPiEt2xT/dBPV8YEiBEYNgZ3WRpth240ir0xLs9EOlUC516SBnqisVYE5PxxyaLlBS+n6Zhz4Y5C5JDYUQ+1GEvdq3s2F6Dcd85e8LCJDqaxFMEyfiYy5DHAl/+1OqtudHPLYW/E2YPI456W+2CT3NcfDsARQJWfNQUqaVlvYyfZn0V2zH6vdK2dvPQgkdE/EHxIW563bEDoeFY8SfpkRN5YnAfC8SRghfWHcjupLXm2+JIL/eHrE53YoifxzeeLwtgcPUVOMVlgOF45WkEa0ANOH7lGcChU=
+  - secure: fkxgkpBFIjWXCnHP4A3Af25bmRcHIn8wmdX3nzULv8BMrgFbvVthra8suDftJhJHQadJYmK2DsVnqlgNbWkbyVZIWISFt5hurW2yetUeOYJkcGP+JmYYdb+aD1GArfgkXny1cSkPNXbQR0ys6jd9+WBCtdNBCZUQWJ1AQrdc6cbUdHITc0pM+Ss1exU+tHp9fYnbxVfUaDxKjmJNu8E+hif1diM7eSxkq0zUT27De3v1dLB/ILK7QSWHBfDAl66QAqalzls5s6Kt/jgRGicwSoDhZgDgqY9Vyvyp7llkLDIROyyP463EGr+5K34j5NTiBeAT1M7N/+/tfvc/eRbREGPs1DUD8zl2FQEf6V+GcZizeIPcnGpcT2wWt2QTeZshidKecyjIQCvsx1MeEA4Fnq2OalmWiyQH7NcYs//gaQ7fKBcjiHfecQ0qcOygmt9xC67ruarElq0pNHDeDv+mxIWAlEwgyMb+c7D7zprB5B+WdCFvlMBnjE3MjB+vvbK/XgRwC9zrc5wFndSnVT2OcnFIQzetLW9A0gD9V5DAr4S8oyhx1BpONJK76LR66/YQ/HsSPjA3OjXu/3S8SxVX/BfQKIWHp52zxA9lRG8vtAAcHlt+wITaLlAHkfVZJWgTgfU+qi/Atzc25XfX9Yt43gs4WcUWAgiY6v+kGrQj1e0=
+  - secure: AJLRMDIbwuYC+8U0WE1wFfYZLjGnS5vYAec1KJKouMWL2NZ9t/JrsgNiQ3k50Tf0NfctXRRFHs7we3mZhYqXOxFYPTNZDvUKyCeOC0SUq8rLB3wdETHocb6LkmqRIh4dHJMSXZf7uuS7KItpijGkCKxoQcn5TX9NtwozpPbarzDWPHS3Fnl5CknbuYd9G1E+t9Qk/ABFVjqmkXbpBYj0Merfsrh6rGfwdH5c0U0WeekP9XAhverqhnUBJ6yWCU90OD3z/4rVJS8TfwF5dCoZLH2isCFJ0ZHG+YEBVzPEnXiGpyZI6fCDBSyjvB8aoYlOBQTmPHjdDwRpDDilNDer2NQfjWnMl4juSa62lghlzC9/A/7EZ2yyeQqpa7K4ThOA0z3x2s50eAUwe4wbVNZx00hicEeC151/gWIXn9Qm2/U+wchXJsk5WWf1/WSEp6ggJRAEa8v6hyST67vdQx97czEq7/ddyX8b75ouygNFxnYExeOP59m4VM2lnrv0gsjTl9SvZMUnGjXL/mNpHrI7/zcRyxxLzA8IGjAKihBUHNHN2bqG/W1YHpSDjerTsO0PetcJTqScJVv4Mx5MDBAlc//H5lRUU9yuq6KSLPpWKZ+uLKwATZ4ApcjwokkIYXg4Y16QwMZso3+MzmX+iYOMUx2ExytarbDPAEDd0o2X/jY=
