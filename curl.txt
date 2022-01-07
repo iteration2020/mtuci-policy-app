@@ -1,0 +1,62 @@
+#Status
+$ curl localhost:8080/api/v1/status
+
+#Orgtype
+save
+$ curl -H "Content-Type: application/json" -d "{\"type\": \"type1\"}" localhost:8080/api/v1/orgtype
+get all
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/orgtype
+get
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/orgtype/1
+delete
+$ curl -X DELETE localhost:8080/api/v1/orgtype/1
+update
+$ curl -X PUT -H "Content-Type: application/json" -d "{\"type\": \"updated\"}" localhost:8080/api/v1/orgtype/1
+
+#Doctype
+save
+$ curl -H "Content-Type: application/json" -d "{\"type\": \"type1\"}" localhost:8080/api/v1/doctype
+get all
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/doctype
+get
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/doctype/1
+delete
+$ curl -X DELETE localhost:8080/api/v1/doctype/1
+update
+$ curl -X PUT -H "Content-Type: application/json" -d "{\"type\": \"updated\"}" localhost:8080/api/v1/doctype/1
+
+#Organisations
+save
+$ curl -H "Content-Type: application/json" -d "{\"orgtype\": {\"id\": 1}, \"address\": \"a\", \"nameorg\": \"name\", \"headorg\": \"head\"}" localhost:8080/api/v1/organisations
+get all
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/organisations
+get
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/organisations/1
+delete
+$ curl -X DELETE localhost:8080/api/v1/organisations/1
+update
+$ curl -X PUT -H "Content-Type: application/json" -d "{\"orgtype\": {\"id\": 1}, \"address\": \"a\", \"nameorg\": \"updated\", \"headorg\": \"head\"}" localhost:8080/api/v1/organisations/1
+
+#Person
+save
+$ curl -H "Content-Type: application/json" -d "{\"doc\": {\"id\": 1}, \"lastname\": \"ln\", \"firstname\": \"fn\", \"patronymic\": \"pat\", \"datebirth\": \"10.10.1988\", \"placebirth\": \"moscow\", \"docnumber\": \"A23\", \"phone\": \"984712341\", \"email\": \"em@mail.ru\"}" localhost:8080/api/v1/person
+get all
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/person
+get
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/person/1
+delete
+$ curl -X DELETE localhost:8080/api/v1/person/1
+update
+$ curl -X PUT -H "Content-Type: application/json" -d "{\"doc\": {\"id\": 1}, \"lastname\": \"new\", \"firstname\": \"new2\", \"patronymic\": \"pat\", \"datebirth\": \"10.10.1988\", \"placebirth\": \"moscow\", \"docnumber\": \"A23\", \"phone\": \"984712341\", \"email\": \"em@mail.ru\"}" localhost:8080/api/v1/organisations/1
+
+#AttachMo
+save
+$ curl -H "Content-Type: application/json" -d "{\"person\": {\"id\": 1}, \"org\": {\"id\": 1}, \"datestart\": \"10.10.1988\", \"dateend\": \"10.10.2030\"}" localhost:8080/api/v1/attachments
+get all
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/attachments
+get
+$ curl -H "Content-Type: application/json" localhost:8080/api/v1/attachments/1
+delete
+$ curl -X DELETE localhost:8080/api/v1/attachments/1
+update
+$ curl -X PUT -H "Content-Type: application/json" -d "{\"person\": {\"id\": 1}, \"org\": {\"id\": 1}, \"datestart\": \"10.10.1988\", \"dateend\": \"10.10.2040\"}" localhost:8080/api/v1/attachments/1
