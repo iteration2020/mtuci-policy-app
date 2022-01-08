@@ -85,7 +85,9 @@
   
 * Типы документов (#Organisations)  
   * Save 
+  
   `$ curl -H "Content-Type: application/json" -d "{\"orgtype\": {\"id\": 1}, \"address\": \"a\", \"nameorg\": \"name\", \"headorg\": \"head\"}" localhost:8080/api/v1/organisations`
+  
   * Get all 
   
   `$ curl -H "Content-Type: application/json" localhost:8080/api/v1/organisations`
@@ -196,8 +198,11 @@ spec:
     app: my-app`
 
  2. Скриншты вывода команды консоли с шага 3.3 на фоне рабочего стола.
+ *![image](https://user-images.githubusercontent.com/66965394/148651003-d73084ee-2338-489f-96f0-32e4e236f331.png)
  3. Скриншоты графического интерфейса с шага 3.5, где видны поды.
+ *![image](https://user-images.githubusercontent.com/66965394/148651052-8cd7caa5-62af-412b-bd72-5e80dbc6c5e6.png)
  4. 30 секундное видео с обзором созданного кластера и вашими комментариями.
+ * https://drive.google.com/file/d/19x5McAdL4lenj7IA8joZ6RYu-m9ix567/view?usp=sharing
 
 # Лабораторная работа №3: CI/CD и деплой приложения в Heroku
 Целью лабораторной работы является знакомство с CI/CD и его реализацией на примере Travis CI и Heroku.
